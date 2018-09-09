@@ -2,7 +2,6 @@ package com.appointment.appointmentAPI.user.dto;
 
 import java.util.List;
 
-import com.appointment.appointmentAPI.user.model.Address;
 import com.appointment.appointmentAPI.user.model.Appointment;
 import com.appointment.appointmentAPI.user.model.Authority;
 
@@ -15,7 +14,7 @@ public class PatientDto {
 	private String email;
 	private String password;
 	private String encryptedPassword;
-	private Address address;
+	private AddressDto address;
 	private String emailVerification;
 	private String emailVerificationStatus;
 	private List<Authority> authorities;
@@ -63,10 +62,10 @@ public class PatientDto {
 	public void setEncryptedPassword(String encryptedPassword) {
 		this.encryptedPassword = encryptedPassword;
 	}
-	public Address getAddress() {
+	public AddressDto getAddress() {
 		return address;
 	}
-	public void setAddress(Address address) {
+	public void setAddress(AddressDto address) {
 		this.address = address;
 	}
 	public String getEmailVerification() {

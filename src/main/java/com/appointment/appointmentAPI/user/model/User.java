@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -35,12 +34,8 @@ public abstract class User {
 	@Column(nullable=false, length=50)
 	private String lastName;
 	
-	@Column(nullable=false, length=120)
+	@Column(nullable=false, length=120, unique = true)
 	private String email;
-	
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "ADDRESS_ID")
-	private Address address;
 	
 	@Column(nullable=false)
 	private String encryptedPassword;
@@ -48,7 +43,7 @@ public abstract class User {
 	private String emailVerificatonToken;
 	
 	@Column(nullable=false, columnDefinition="boolean default false")
-	private String emailVerificationStatus;
+	private boolean emailVerificationStatus;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")
@@ -90,6 +85,15 @@ public abstract class User {
 		return email;
 	}
 
+	
+	public List<Authority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(List<Authority> authorities) {
+		this.authorities = authorities;
+	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -110,11 +114,11 @@ public abstract class User {
 		this.emailVerificatonToken = emailVerificatonToken;
 	}
 
-	public String getEmailVerificationStatus() {
+	public boolean getEmailVerificationStatus() {
 		return emailVerificationStatus;
 	}
 
-	public void setEmailVerificationStatus(String emailVerificationStatus) {
+	public void setEmailVerificationStatus(boolean emailVerificationStatus) {
 		this.emailVerificationStatus = emailVerificationStatus;
 	}
 

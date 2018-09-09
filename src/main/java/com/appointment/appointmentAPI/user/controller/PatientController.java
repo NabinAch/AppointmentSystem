@@ -16,14 +16,14 @@ import com.appointment.appointmentAPI.user.model.Doctor;
 import com.appointment.appointmentAPI.user.model.Patient;
 import com.appointment.appointmentAPI.user.request.PatientRequestModel;
 import com.appointment.appointmentAPI.user.response.PatientResponseModel;
-import com.appointment.appointmentAPI.user.service.PatientService;
+import com.appointment.appointmentAPI.user.service.UserService;
 
 @RestController
 @RequestMapping("patient") 
 public class PatientController {
 
 	@Autowired
-	PatientService patientService;
+	UserService patientService;
 	
 	@GetMapping
 	public Appointment getUser()

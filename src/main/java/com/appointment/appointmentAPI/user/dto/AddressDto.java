@@ -1,28 +1,11 @@
-package com.appointment.appointmentAPI.user.model;
+package com.appointment.appointmentAPI.user.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+public class AddressDto {
 
-@Entity
-public class Address {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(length=30, nullable=false)
 	private String streetAddress;
-	
-	@Column(length=10, nullable=false)
 	private String city;
-	
-	@Column(length=5, nullable=false)
 	private String state;
-	
-	@Column(length=5, nullable=false)
 	private String zipcode;
 	
 	
@@ -56,6 +39,4 @@ public class Address {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	
-	
 }
