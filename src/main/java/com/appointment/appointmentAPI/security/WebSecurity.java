@@ -25,7 +25,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 		http.csrf().disable().authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/patient")
 		.permitAll()
-		.anyRequest().authenticated();
+		.anyRequest().authenticated().and().addFilter(new AuthenticationFilter(authenticationManager()));
 	}
 	
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {

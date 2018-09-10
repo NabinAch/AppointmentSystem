@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appointment.appointmentAPI.user.dto.PatientDto;
+import com.appointment.appointmentAPI.user.dto.UserDto;
 import com.appointment.appointmentAPI.user.model.Appointment;
 import com.appointment.appointmentAPI.user.model.Doctor;
 import com.appointment.appointmentAPI.user.model.Patient;
@@ -40,13 +41,13 @@ public class PatientController {
 		PatientResponseModel patientResponse = new PatientResponseModel();
 		
 		ModelMapper modelMapper = new ModelMapper();
-		PatientDto patientDto = modelMapper.map(patientRequest, PatientDto.class);
+		UserDto patientDto = modelMapper.map(patientRequest, PatientDto.class);
 		
-		PatientDto createdPatient= patientService.createPatient(patientDto);
+		UserDto createdPatient= patientService.createUser(patientDto);
 		
-		PatientResponseModel patientRespose = modelMapper.map(createdPatient, PatientResponseModel.class);
+		patientResponse = modelMapper.map(createdPatient, PatientResponseModel.class);
 		
-		return patientRespose;
+		return patientResponse;
 	}
 	
 	@PutMapping

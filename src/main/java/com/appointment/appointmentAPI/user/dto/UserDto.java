@@ -1,67 +1,21 @@
-package com.appointment.appointmentAPI.user.model;
+package com.appointment.appointmentAPI.user.dto;
 
-import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.appointment.appointmentAPI.user.model.Authority;
 
-@Entity
-@Inheritance
-@DiscriminatorColumn(name = "user_type")
-@Table(name = "users")
-public abstract class User implements Serializable{
+public abstract class UserDto {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-
-	@Column(nullable = false)
 	private String userId;
-
-	@Column(nullable = false, length = 50)
 	private String firstName;
-
-	@Column(nullable = false, length = 50)
 	private String lastName;
-
-	@Column(nullable = false, length = 120, unique = true)
 	private String email;
-
-	@Column(nullable = false)
+	private String password;
 	private String encryptedPassword;
-
 	private String emailVerificatonToken;
-
-	@Column(nullable = false, columnDefinition = "boolean default false")
 	private boolean emailVerificationStatus;
-
-
-	@Column(nullable = false, length = 50)
+	private List<Authority> authorities;
 	private String role;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getUserId() {
 		return userId;
@@ -95,6 +49,14 @@ public abstract class User implements Serializable{
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getEncryptedPassword() {
 		return encryptedPassword;
 	}
@@ -111,12 +73,20 @@ public abstract class User implements Serializable{
 		this.emailVerificatonToken = emailVerificatonToken;
 	}
 
-	public boolean getEmailVerificationStatus() {
+	public boolean isEmailVerificationStatus() {
 		return emailVerificationStatus;
 	}
 
 	public void setEmailVerificationStatus(boolean emailVerificationStatus) {
 		this.emailVerificationStatus = emailVerificationStatus;
+	}
+
+	public List<Authority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(List<Authority> authorities) {
+		this.authorities = authorities;
 	}
 
 	public String getRole() {

@@ -16,7 +16,7 @@ public class Patient extends User {
 	@JoinColumn(name = "ADDRESS_ID")
 	private Address address;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PATIENT_ID")
 	private List<Appointment> appointmentList;
 

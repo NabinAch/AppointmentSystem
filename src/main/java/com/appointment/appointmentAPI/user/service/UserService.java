@@ -2,16 +2,16 @@ package com.appointment.appointmentAPI.user.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.appointment.appointmentAPI.user.dto.PatientDto;
+import com.appointment.appointmentAPI.user.dto.UserDto;
 
 public interface UserService extends UserDetailsService{
 
-	PatientDto createPatient(PatientDto patientDto);
+	UserDto createUser(UserDto userDto);
 	
-	PatientDto updatePatient(PatientDto patientDto);
+	UserDto updateUser(UserDto userDto);
 	
-	PatientDto deletePatient(PatientDto patientDto);
+	UserDto deleteUser(UserDto userDto);
 	
-	PatientDto getPatient(PatientDto patientDto);
+	UserDto getUser(String userName);
 	
 }
