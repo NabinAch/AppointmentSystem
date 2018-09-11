@@ -5,6 +5,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.appointment.appointmentAPI.user.service.UserService;
@@ -22,10 +23,22 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
 		http.csrf().disable().authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/patient")
 		.permitAll()
-		.anyRequest().authenticated().and().addFilter(new AuthenticationFilter(authenticationManager()));
+		.antMatchers(HttpMethod.PUT, "/patient")
+		.hasAuthority("ROLE_PATIENT")
+		.antMatchers(HttpMethod.DELETE, "/patient")
+		.hasAuthority("ROLE_ADMIN")
+		.anyRequest()
+		.authenticated()
+		.and()
+		.addFilter(new AuthenticationFilter(authenticationManager()))
+		.addFilter(new AuthorizationFilter(authenticationManager()));
+		
+		
 	}
 	
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {

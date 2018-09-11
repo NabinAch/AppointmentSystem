@@ -2,6 +2,9 @@ package com.appointment.appointmentAPI.user.controller;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,45 +23,41 @@ import com.appointment.appointmentAPI.user.response.PatientResponseModel;
 import com.appointment.appointmentAPI.user.service.UserService;
 
 @RestController
-@RequestMapping("patient") 
+@RequestMapping("patient")
 public class PatientController {
 
 	@Autowired
 	UserService patientService;
-	
+
 	@GetMapping
-	public Appointment getUser()
-	{
+	public Appointment getUser() {
 		Patient patient = new Patient();
 		Doctor doctor = new Doctor();
 		Appointment appointment = new Appointment();
 		return appointment;
 	}
-	
+
 	@PostMapping
-	public PatientResponseModel createUser(@RequestBody PatientRequestModel patientRequest)
-	{
+	public PatientResponseModel createUser(@RequestBody PatientRequestModel patientRequest) {
 		PatientResponseModel patientResponse = new PatientResponseModel();
-		
+
 		ModelMapper modelMapper = new ModelMapper();
 		UserDto patientDto = modelMapper.map(patientRequest, PatientDto.class);
-		
-		UserDto createdPatient= patientService.createUser(patientDto);
-		
+
+		UserDto createdPatient = patientService.createUser(patientDto);
+
 		patientResponse = modelMapper.map(createdPatient, PatientResponseModel.class);
-		
+
 		return patientResponse;
 	}
-	
+
 	@PutMapping
-	public String updateUser()
-	{
+	public String updateUser() {
 		return "Update User";
 	}
-	
+
 	@DeleteMapping
-	public String deleteUser()
-	{
+	public String deleteUser() {
 		return "Delete User";
 	}
 }
