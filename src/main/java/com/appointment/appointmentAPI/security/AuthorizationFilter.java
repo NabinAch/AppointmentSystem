@@ -1,7 +1,7 @@
 package com.appointment.appointmentAPI.security;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.FilterChain;
@@ -17,11 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.appointment.appointmentAPI.SpringApplicationContext;
-import com.appointment.appointmentAPI.user.dto.UserDto;
-import com.appointment.appointmentAPI.user.model.User;
+import com.appointment.appointmentAPI.user.model.UserEntity;
 import com.appointment.appointmentAPI.user.repository.UserRepository;
-import com.appointment.appointmentAPI.user.service.UserService;
-
 import io.jsonwebtoken.Jwts;
 
 public class AuthorizationFilter extends BasicAuthenticationFilter {
@@ -55,13 +52,14 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 
 			String user = Jwts.parser().setSigningKey(SecurityConstants.getTokenSecret()).parseClaimsJws(token)
 					.getBody().getSubject();
+			
 
-			if (user != null) {
-				UserRepository userRepo = (UserRepository)SpringApplicationContext.getBean("userRepository");
-				User userEntity = userRepo.findByEmail(user);
+			if (user != null){
+				UserRepository userRepo = (UserRepository) SpringApplicationContext.getBean("userRepository");
+				UserEntity userEntity = userRepo.findByEmail(user);
 				List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList(userEntity.getRole());
 				return new UsernamePasswordAuthenticationToken(user, userEntity.getEncryptedPassword(), auth);
-				
+
 			}
 
 			return null;

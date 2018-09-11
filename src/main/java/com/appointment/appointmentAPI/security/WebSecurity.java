@@ -31,7 +31,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 		.antMatchers(HttpMethod.PUT, "/patient")
 		.hasAuthority("ROLE_PATIENT")
 		.antMatchers(HttpMethod.DELETE, "/patient")
-		.hasAuthority("ROLE_ADMIN")
+		.hasAuthority("ROLE_PATIENT")
 		.anyRequest()
 		.authenticated()
 		.and()
