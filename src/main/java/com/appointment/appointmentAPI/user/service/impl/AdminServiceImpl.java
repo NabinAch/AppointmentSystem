@@ -13,17 +13,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.appointment.appointmentAPI.shared.Utils;
+import com.appointment.appointmentAPI.user.dto.AdminDto;
 import com.appointment.appointmentAPI.user.dto.PatientDto;
 import com.appointment.appointmentAPI.user.dto.UserDto;
+import com.appointment.appointmentAPI.user.model.Admin;
 import com.appointment.appointmentAPI.user.model.Patient;
+import com.appointment.appointmentAPI.user.repository.AdminRepository;
 import com.appointment.appointmentAPI.user.repository.PatientRepository;
 import com.appointment.appointmentAPI.user.service.UserService;
 
 @Service
-public class PatientServiceImpl implements UserService {
+public class AdminServiceImpl implements UserService {
+
 
 	@Autowired
-	PatientRepository patientRepo;
+	AdminRepository adminRepo;
 	
 	@Autowired
 	Utils utils;
@@ -35,20 +39,20 @@ public class PatientServiceImpl implements UserService {
 	ModelMapper modelMapper;
 	
 	@Override
-	public UserDto createUser(UserDto patientDto) {
-		Patient patient = new Patient();
+	public UserDto createUser(UserDto adminDto) {
+		Admin admin = new Admin();
 		
-		patient = modelMapper.map(patientDto, Patient.class);
-		patient.setUserId(utils.generateUserId(30));
-		patient.setEncryptedPassword(bCryptPasswordEncoder.encode(patientDto.getPassword()));
-		patient.setRole("ROLE_PATIENT");
+		admin = modelMapper.map(adminDto, Admin.class);
+		admin.setUserId(utils.generateUserId(30));
+		admin.setEncryptedPassword(bCryptPasswordEncoder.encode(adminDto.getPassword()));
+		admin.setRole("ROLE_ADMIN");
 		
-		Patient storedPatient = patientRepo.save(patient);
+		Admin storedAdmin = adminRepo.save(admin);
 
-		UserDto returnPatient = new PatientDto();
-		returnPatient = modelMapper.map(storedPatient, PatientDto.class);
+		UserDto returnAdmin = new AdminDto();
+		returnAdmin = modelMapper.map(storedAdmin, AdminDto.class);
 
-		return returnPatient;
+		return returnAdmin;
 	}
 
 	@Override
@@ -66,23 +70,23 @@ public class PatientServiceImpl implements UserService {
 	@Override
 	public UserDto getUser(String username) {
 		
-		Patient patient = patientRepo.findByEmail(username);
-		if(patient == null) throw new UsernameNotFoundException(username);
+		Admin admin = adminRepo.findByEmail(username);
+		if(admin == null) throw new UsernameNotFoundException(username);
 		
-		UserDto userdto = new PatientDto();
-		userdto = modelMapper.map(patient, PatientDto.class);
+		UserDto userdto = new AdminDto();
+		userdto = modelMapper.map(admin, AdminDto.class);
 		
 		return userdto;
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Patient patient = patientRepo.findByEmail(email);
+		Admin admin = adminRepo.findByEmail(email);
 		
-		if(patient == null) throw new UsernameNotFoundException(email);
+		if(admin == null) throw new UsernameNotFoundException(email);
 		
-		List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList(patient.getRole());
-		return new User(patient.getEmail(), patient.getEncryptedPassword(), auth);
+		List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList(admin.getRole());
+		return new User(admin.getEmail(), admin.getEncryptedPassword(), auth);
 	}
 
 }

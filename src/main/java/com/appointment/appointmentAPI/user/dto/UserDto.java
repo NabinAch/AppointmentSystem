@@ -14,7 +14,6 @@ public abstract class UserDto {
 	private String encryptedPassword;
 	private String emailVerificatonToken;
 	private boolean emailVerificationStatus;
-	private List<Authority> authorities;
 	private String role;
 
 	public String getUserId() {
@@ -79,14 +78,6 @@ public abstract class UserDto {
 
 	public void setEmailVerificationStatus(boolean emailVerificationStatus) {
 		this.emailVerificationStatus = emailVerificationStatus;
-	}
-
-	public List<Authority> getAuthorities() {
-		return authorities;
-	}
-
-	public void setAuthorities(List<Authority> authorities) {
-		this.authorities = authorities;
 	}
 
 	public String getRole() {

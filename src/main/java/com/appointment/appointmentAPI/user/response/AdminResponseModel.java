@@ -1,14 +1,11 @@
 package com.appointment.appointmentAPI.user.response;
 
-import com.appointment.appointmentAPI.user.model.Address;
-
-public class PatientResponseModel {
+public class AdminResponseModel {
 
 	private String userId;
 	private String firstName;
 	private String lastName;
 	private String email;
-	private Address address;
 	
 	
 	public String getUserId() {
@@ -35,12 +32,5 @@ public class PatientResponseModel {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Address getAddress() {
-		return address;
-	}
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-	
 	
 }

@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Doctor extends User {
+public class Doctor extends UserEntity {
 
 	private String department;
 	

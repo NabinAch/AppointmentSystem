@@ -2,9 +2,6 @@ package com.appointment.appointmentAPI.user.controller;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,42 +10,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.appointment.appointmentAPI.user.dto.AdminDto;
 import com.appointment.appointmentAPI.user.dto.PatientDto;
 import com.appointment.appointmentAPI.user.dto.UserDto;
 import com.appointment.appointmentAPI.user.model.Appointment;
 import com.appointment.appointmentAPI.user.model.Doctor;
 import com.appointment.appointmentAPI.user.model.Patient;
+import com.appointment.appointmentAPI.user.request.AdminRequestModel;
 import com.appointment.appointmentAPI.user.request.PatientRequestModel;
+import com.appointment.appointmentAPI.user.response.AdminResponseModel;
 import com.appointment.appointmentAPI.user.response.PatientResponseModel;
 import com.appointment.appointmentAPI.user.service.UserService;
 
 @RestController
-@RequestMapping("patient")
-public class PatientController {
+@RequestMapping("admin")
+public class AdminController {
 
 	@Autowired
-	UserService patientServiceImpl;
+	UserService adminServiceImpl;
 
 	@GetMapping
-	public Appointment getUser() {
-		Patient patient = new Patient();
-		Doctor doctor = new Doctor();
-		Appointment appointment = new Appointment();
-		return appointment;
+	public String getUser() {
+		return "Get User";
 	}
 
 	@PostMapping
-	public PatientResponseModel createUser(@RequestBody PatientRequestModel patientRequest) {
-		PatientResponseModel patientResponse = new PatientResponseModel();
+	public AdminResponseModel createUser(@RequestBody AdminRequestModel adminRequest) {
+		AdminResponseModel adminResponse = new AdminResponseModel();
 
 		ModelMapper modelMapper = new ModelMapper();
-		UserDto patientDto = modelMapper.map(patientRequest, PatientDto.class);
+		UserDto adminDto = modelMapper.map(adminRequest, AdminDto.class);
 
-		UserDto createdPatient = patientServiceImpl.createUser(patientDto);
+		UserDto createdAdmin = adminServiceImpl.createUser(adminDto);
 
-		patientResponse = modelMapper.map(createdPatient, PatientResponseModel.class);
+		adminResponse = modelMapper.map(createdAdmin, AdminResponseModel.class);
 
-		return patientResponse;
+		return adminResponse;
 	}
 
 	@PutMapping

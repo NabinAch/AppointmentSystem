@@ -10,20 +10,22 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import com.appointment.appointmentAPI.shared.Utils;
+import com.appointment.appointmentAPI.user.dto.DoctorDto;
 import com.appointment.appointmentAPI.user.dto.PatientDto;
 import com.appointment.appointmentAPI.user.dto.UserDto;
+import com.appointment.appointmentAPI.user.model.Doctor;
 import com.appointment.appointmentAPI.user.model.Patient;
+import com.appointment.appointmentAPI.user.repository.DoctorRepository;
 import com.appointment.appointmentAPI.user.repository.PatientRepository;
 import com.appointment.appointmentAPI.user.service.UserService;
 
-@Service
-public class PatientServiceImpl implements UserService {
+public class DoctorServiceImpl implements UserService {
+
 
 	@Autowired
-	PatientRepository patientRepo;
+	DoctorRepository doctorRepo;
 	
 	@Autowired
 	Utils utils;
@@ -35,20 +37,20 @@ public class PatientServiceImpl implements UserService {
 	ModelMapper modelMapper;
 	
 	@Override
-	public UserDto createUser(UserDto patientDto) {
-		Patient patient = new Patient();
+	public UserDto createUser(UserDto doctorDto) {
+		Doctor doctor = new Doctor();
 		
-		patient = modelMapper.map(patientDto, Patient.class);
-		patient.setUserId(utils.generateUserId(30));
-		patient.setEncryptedPassword(bCryptPasswordEncoder.encode(patientDto.getPassword()));
-		patient.setRole("ROLE_PATIENT");
+		doctor = modelMapper.map(doctorDto, Doctor.class);
+		doctor.setUserId(utils.generateUserId(30));
+		doctor.setEncryptedPassword(bCryptPasswordEncoder.encode(doctorDto.getPassword()));
+		doctor.setRole("ROLE_DOCTOR");
 		
-		Patient storedPatient = patientRepo.save(patient);
+		Doctor storedDoctor = doctorRepo.save(doctor);
 
-		UserDto returnPatient = new PatientDto();
-		returnPatient = modelMapper.map(storedPatient, PatientDto.class);
+		UserDto returnDoctor = new DoctorDto();
+		returnDoctor = modelMapper.map(storedDoctor, DoctorDto.class);
 
-		return returnPatient;
+		return returnDoctor;
 	}
 
 	@Override
@@ -66,23 +68,23 @@ public class PatientServiceImpl implements UserService {
 	@Override
 	public UserDto getUser(String username) {
 		
-		Patient patient = patientRepo.findByEmail(username);
-		if(patient == null) throw new UsernameNotFoundException(username);
+		Doctor doctor = doctorRepo.findByEmail(username);
+		if(doctor == null) throw new UsernameNotFoundException(username);
 		
-		UserDto userdto = new PatientDto();
-		userdto = modelMapper.map(patient, PatientDto.class);
+		UserDto userdto = new DoctorDto();
+		userdto = modelMapper.map(doctor, DoctorDto.class);
 		
 		return userdto;
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Patient patient = patientRepo.findByEmail(email);
+		Doctor doctor = doctorRepo.findByEmail(email);
 		
-		if(patient == null) throw new UsernameNotFoundException(email);
+		if(doctor == null) throw new UsernameNotFoundException(email);
 		
-		List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList(patient.getRole());
-		return new User(patient.getEmail(), patient.getEncryptedPassword(), auth);
+		List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList(doctor.getRole());
+		return new User(doctor.getEmail(), doctor.getEncryptedPassword(), auth);
 	}
 
 }

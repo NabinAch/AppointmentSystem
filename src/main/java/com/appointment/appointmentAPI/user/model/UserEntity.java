@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Inheritance
 @DiscriminatorColumn(name = "user_type")
 @Table(name = "users")
-public abstract class User implements Serializable{
+public abstract class UserEntity implements Serializable{
 
 	/**
 	 * 
