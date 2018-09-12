@@ -1,25 +1,16 @@
 package com.appointment.appointmentAPI.user.service.impl;
 
-import java.util.List;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.appointment.appointmentAPI.shared.Utils;
 import com.appointment.appointmentAPI.user.dto.DoctorDto;
-import com.appointment.appointmentAPI.user.dto.PatientDto;
 import com.appointment.appointmentAPI.user.dto.UserDto;
 import com.appointment.appointmentAPI.user.model.Doctor;
-import com.appointment.appointmentAPI.user.model.Patient;
 import com.appointment.appointmentAPI.user.repository.DoctorRepository;
-import com.appointment.appointmentAPI.user.repository.PatientRepository;
 import com.appointment.appointmentAPI.user.service.UserService;
 
 @Service("doctorServiceImpl")

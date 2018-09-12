@@ -2,7 +2,6 @@ package com.appointment.appointmentAPI.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import javax.servlet.FilterChain;
@@ -14,16 +13,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.appointment.appointmentAPI.SpringApplicationContext;
-import com.appointment.appointmentAPI.user.dto.UserDto;
 import com.appointment.appointmentAPI.user.request.LoginRequestModel;
-import com.appointment.appointmentAPI.user.service.UserService;
-import com.appointment.appointmentAPI.user.service.impl.LoginService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Jwts;
@@ -56,7 +50,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			Authentication auth) throws IOException, ServletException {
 
 		String userName = ((User) auth.getPrincipal()).getUsername();
-		Collection<GrantedAuthority> role = ((User) auth.getPrincipal()).getAuthorities();
 		String token = Jwts.builder().setSubject(userName)
 				.setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
 				.signWith(SignatureAlgorithm.HS512, SecurityConstants.getTokenSecret()).compact();

@@ -11,15 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appointment.appointmentAPI.user.dto.AdminDto;
-import com.appointment.appointmentAPI.user.dto.PatientDto;
 import com.appointment.appointmentAPI.user.dto.UserDto;
-import com.appointment.appointmentAPI.user.model.Appointment;
-import com.appointment.appointmentAPI.user.model.Doctor;
-import com.appointment.appointmentAPI.user.model.Patient;
 import com.appointment.appointmentAPI.user.request.AdminRequestModel;
-import com.appointment.appointmentAPI.user.request.PatientRequestModel;
 import com.appointment.appointmentAPI.user.response.AdminResponseModel;
-import com.appointment.appointmentAPI.user.response.PatientResponseModel;
 import com.appointment.appointmentAPI.user.service.UserService;
 
 @RestController
@@ -29,6 +23,9 @@ public class AdminController {
 	@Autowired
 	UserService adminServiceImpl;
 
+	@Autowired
+	ModelMapper modelMapper;
+
 	@GetMapping
 	public String getUser() {
 		return "Get User";
@@ -37,8 +34,7 @@ public class AdminController {
 	@PostMapping
 	public AdminResponseModel createUser(@RequestBody AdminRequestModel adminRequest) {
 		AdminResponseModel adminResponse = new AdminResponseModel();
-
-		ModelMapper modelMapper = new ModelMapper();
+		
 		UserDto adminDto = modelMapper.map(adminRequest, AdminDto.class);
 
 		UserDto createdAdmin = adminServiceImpl.createUser(adminDto);

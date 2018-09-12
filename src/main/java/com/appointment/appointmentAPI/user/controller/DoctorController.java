@@ -10,12 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.appointment.appointmentAPI.user.dto.AdminDto;
 import com.appointment.appointmentAPI.user.dto.DoctorDto;
 import com.appointment.appointmentAPI.user.dto.UserDto;
-import com.appointment.appointmentAPI.user.request.AdminRequestModel;
 import com.appointment.appointmentAPI.user.request.DoctorRequestModel;
-import com.appointment.appointmentAPI.user.response.AdminResponseModel;
 import com.appointment.appointmentAPI.user.response.DoctorResponseModel;
 import com.appointment.appointmentAPI.user.service.UserService;
 

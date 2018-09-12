@@ -1,4 +1,4 @@
-package com.appointment.appointmentAPI.user.service.impl;
+package com.appointment.appointmentAPI.security;
 
 import java.util.List;
 
@@ -12,9 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.appointment.appointmentAPI.user.dto.PatientDto;
-import com.appointment.appointmentAPI.user.dto.UserDto;
-import com.appointment.appointmentAPI.user.model.Patient;
 import com.appointment.appointmentAPI.user.model.UserEntity;
 import com.appointment.appointmentAPI.user.repository.UserRepository;
 

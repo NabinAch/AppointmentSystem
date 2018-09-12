@@ -1,7 +1,6 @@
 package com.appointment.appointmentAPI.security;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.FilterChain;
@@ -19,6 +18,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import com.appointment.appointmentAPI.SpringApplicationContext;
 import com.appointment.appointmentAPI.user.model.UserEntity;
 import com.appointment.appointmentAPI.user.repository.UserRepository;
+
 import io.jsonwebtoken.Jwts;
 
 public class AuthorizationFilter extends BasicAuthenticationFilter {
@@ -52,9 +52,8 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 
 			String user = Jwts.parser().setSigningKey(SecurityConstants.getTokenSecret()).parseClaimsJws(token)
 					.getBody().getSubject();
-			
 
-			if (user != null){
+			if (user != null) {
 				UserRepository userRepo = (UserRepository) SpringApplicationContext.getBean("userRepository");
 				UserEntity userEntity = userRepo.findByEmail(user);
 				List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList(userEntity.getRole());
