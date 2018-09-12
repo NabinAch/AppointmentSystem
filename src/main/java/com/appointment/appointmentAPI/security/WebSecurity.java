@@ -8,39 +8,41 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.appointment.appointmentAPI.user.service.UserService;
+import com.appointment.appointmentAPI.user.service.impl.LoginService;
 
 @EnableWebSecurity
-public class WebSecurity extends WebSecurityConfigurerAdapter{
-
-	private final UserService userDetailsService;
-	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+public class WebSecurity extends WebSecurityConfigurerAdapter {
 	
-	public WebSecurity(UserService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+	private final LoginService userDetailsService;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	public WebSecurity(LoginService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
 		this.userDetailsService = userDetailsService;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
-	
+
 	@Override
-	protected void configure(HttpSecurity http) throws Exception{
+	protected void configure(HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		
+
 		http.csrf().disable().authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/patient")
 		.permitAll()
-		.antMatchers(HttpMethod.PUT, "/patient")
-		.hasAuthority("ROLE_PATIENT")
-		.antMatchers(HttpMethod.DELETE, "/patient")
-		.hasAuthority("ROLE_PATIENT")
+		.antMatchers(HttpMethod.GET, "/patient", "/admin").hasAuthority("ROLE_ADMIN")
+		.antMatchers(HttpMethod.PUT, "/patient").hasAnyAuthority("ROLE_PATIENT","ROLE_ADMIN")
+		.antMatchers(HttpMethod.DELETE, "/patient").hasAnyAuthority("ROLE_PATIENT","ROLE_ADMIN")
+		.antMatchers(HttpMethod.POST, "/doctor", "/admin").hasAuthority("ROLE_ADMIN")
+		.antMatchers(HttpMethod.PUT, "/doctor", "/admin").hasAuthority("ROLE_ADMIN")
+		.antMatchers(HttpMethod.DELETE, "/doctor", "/admin").hasAuthority("ROLE_ADMIN")
+		.antMatchers(HttpMethod.GET, "/doctor").hasAnyAuthority("ROLE_ADMIN","ROLE_PATIENT")
 		.anyRequest()
 		.authenticated()
 		.and()
 		.addFilter(new AuthenticationFilter(authenticationManager()))
 		.addFilter(new AuthorizationFilter(authenticationManager()));
-		
-		
+
 	}
-	
+
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
 	}

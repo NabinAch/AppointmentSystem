@@ -1,7 +1,5 @@
 package com.appointment.appointmentAPI.user.service.impl;
 
-import java.util.List;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,7 +17,7 @@ import com.appointment.appointmentAPI.user.model.Patient;
 import com.appointment.appointmentAPI.user.repository.PatientRepository;
 import com.appointment.appointmentAPI.user.service.UserService;
 
-@Service
+@Service("patientServiceImpl")
 public class PatientServiceImpl implements UserService {
 
 	@Autowired
@@ -73,16 +71,6 @@ public class PatientServiceImpl implements UserService {
 		userdto = modelMapper.map(patient, PatientDto.class);
 		
 		return userdto;
-	}
-
-	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Patient patient = patientRepo.findByEmail(email);
-		
-		if(patient == null) throw new UsernameNotFoundException(email);
-		
-		List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList(patient.getRole());
-		return new User(patient.getEmail(), patient.getEncryptedPassword(), auth);
 	}
 
 }

@@ -23,6 +23,7 @@ import com.appointment.appointmentAPI.SpringApplicationContext;
 import com.appointment.appointmentAPI.user.dto.UserDto;
 import com.appointment.appointmentAPI.user.request.LoginRequestModel;
 import com.appointment.appointmentAPI.user.service.UserService;
+import com.appointment.appointmentAPI.user.service.impl.LoginService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Jwts;
@@ -60,16 +61,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 				.setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
 				.signWith(SignatureAlgorithm.HS512, SecurityConstants.getTokenSecret()).compact();
 
-		String serviceBean=null;
-		if (role.contains(new SimpleGrantedAuthority("ROLE_PATIENT"))) {
-			serviceBean = "patientServiceImpl";
-		}
-		System.out.println(serviceBean);
-		UserService userService = (UserService) SpringApplicationContext.getBean(serviceBean);
-		UserDto userDto = userService.getUser(userName);
+		LoginService loginService = (LoginService) SpringApplicationContext.getBean("loginService");
+		String userId = loginService.getUser(userName);
 
 		res.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
-		res.addHeader("UserID", userDto.getUserId());
+		res.addHeader("UserID", userId);
 		
 	}
 

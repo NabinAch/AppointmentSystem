@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.appointment.appointmentAPI.shared.Utils;
 import com.appointment.appointmentAPI.user.dto.DoctorDto;
@@ -21,6 +22,7 @@ import com.appointment.appointmentAPI.user.repository.DoctorRepository;
 import com.appointment.appointmentAPI.user.repository.PatientRepository;
 import com.appointment.appointmentAPI.user.service.UserService;
 
+@Service("doctorServiceImpl")
 public class DoctorServiceImpl implements UserService {
 
 
@@ -75,16 +77,6 @@ public class DoctorServiceImpl implements UserService {
 		userdto = modelMapper.map(doctor, DoctorDto.class);
 		
 		return userdto;
-	}
-
-	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Doctor doctor = doctorRepo.findByEmail(email);
-		
-		if(doctor == null) throw new UsernameNotFoundException(email);
-		
-		List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList(doctor.getRole());
-		return new User(doctor.getEmail(), doctor.getEncryptedPassword(), auth);
 	}
 
 }

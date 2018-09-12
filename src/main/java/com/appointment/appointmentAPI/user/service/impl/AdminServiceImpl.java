@@ -22,7 +22,7 @@ import com.appointment.appointmentAPI.user.repository.AdminRepository;
 import com.appointment.appointmentAPI.user.repository.PatientRepository;
 import com.appointment.appointmentAPI.user.service.UserService;
 
-@Service
+@Service("adminServiceImpl")
 public class AdminServiceImpl implements UserService {
 
 
@@ -79,14 +79,5 @@ public class AdminServiceImpl implements UserService {
 		return userdto;
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Admin admin = adminRepo.findByEmail(email);
-		
-		if(admin == null) throw new UsernameNotFoundException(email);
-		
-		List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList(admin.getRole());
-		return new User(admin.getEmail(), admin.getEncryptedPassword(), auth);
-	}
 
 }
