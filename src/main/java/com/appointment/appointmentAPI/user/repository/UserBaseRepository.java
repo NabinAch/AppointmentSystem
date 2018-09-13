@@ -9,4 +9,6 @@ import com.appointment.appointmentAPI.user.model.UserEntity;
 public interface UserBaseRepository<T extends UserEntity> extends CrudRepository<T, Long> {
 
 	public T findByEmail(String email);
+	
+	public T findByUserId(String userId);
 }

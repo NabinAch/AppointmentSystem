@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Patient extends UserEntity {
 
@@ -16,6 +18,7 @@ public class Patient extends UserEntity {
 	@JoinColumn(name = "ADDRESS_ID")
 	private Address address;
 	
+	@JsonBackReference
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PATIENT_ID")
 	private List<Appointment> appointmentList;

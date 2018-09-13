@@ -10,34 +10,34 @@ import com.appointment.appointmentAPI.shared.Utils;
 import com.appointment.appointmentAPI.user.dto.DoctorDto;
 import com.appointment.appointmentAPI.user.dto.UserDto;
 import com.appointment.appointmentAPI.user.model.Doctor;
+import com.appointment.appointmentAPI.user.model.UserEntity;
 import com.appointment.appointmentAPI.user.repository.DoctorRepository;
 import com.appointment.appointmentAPI.user.service.UserService;
 
 @Service("doctorServiceImpl")
 public class DoctorServiceImpl implements UserService {
 
-
 	@Autowired
 	DoctorRepository doctorRepo;
-	
+
 	@Autowired
 	Utils utils;
-	
+
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
 	ModelMapper modelMapper;
-	
+
 	@Override
 	public UserDto createUser(UserDto doctorDto) {
 		Doctor doctor = new Doctor();
-		
+
 		doctor = modelMapper.map(doctorDto, Doctor.class);
 		doctor.setUserId(utils.generateUserId(30));
 		doctor.setEncryptedPassword(bCryptPasswordEncoder.encode(doctorDto.getPassword()));
 		doctor.setRole("ROLE_DOCTOR");
-		
+
 		Doctor storedDoctor = doctorRepo.save(doctor);
 
 		UserDto returnDoctor = new DoctorDto();
@@ -60,14 +60,20 @@ public class DoctorServiceImpl implements UserService {
 
 	@Override
 	public UserDto getUser(String username) {
-		
+
 		Doctor doctor = doctorRepo.findByEmail(username);
-		if(doctor == null) throw new UsernameNotFoundException(username);
-		
+		if (doctor == null)
+			throw new UsernameNotFoundException(username);
+
 		UserDto userdto = new DoctorDto();
 		userdto = modelMapper.map(doctor, DoctorDto.class);
-		
+
 		return userdto;
+	}
+
+	@Override
+	public UserEntity getUserFromUserId(String userId) {
+		return doctorRepo.findByUserId(userId);
 	}
 
 }

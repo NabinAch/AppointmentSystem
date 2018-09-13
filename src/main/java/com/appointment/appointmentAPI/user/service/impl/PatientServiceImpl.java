@@ -10,6 +10,7 @@ import com.appointment.appointmentAPI.shared.Utils;
 import com.appointment.appointmentAPI.user.dto.PatientDto;
 import com.appointment.appointmentAPI.user.dto.UserDto;
 import com.appointment.appointmentAPI.user.model.Patient;
+import com.appointment.appointmentAPI.user.model.UserEntity;
 import com.appointment.appointmentAPI.user.repository.PatientRepository;
 import com.appointment.appointmentAPI.user.service.UserService;
 
@@ -67,6 +68,11 @@ public class PatientServiceImpl implements UserService {
 		userdto = modelMapper.map(patient, PatientDto.class);
 		
 		return userdto;
+	}
+
+	@Override
+	public UserEntity getUserFromUserId(String userId) {
+		return patientRepo.findByUserId(userId);
 	}
 
 }

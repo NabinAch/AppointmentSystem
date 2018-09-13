@@ -16,6 +16,7 @@ import com.appointment.appointmentAPI.user.dto.PatientDto;
 import com.appointment.appointmentAPI.user.dto.UserDto;
 import com.appointment.appointmentAPI.user.model.Admin;
 import com.appointment.appointmentAPI.user.model.Patient;
+import com.appointment.appointmentAPI.user.model.UserEntity;
 import com.appointment.appointmentAPI.user.repository.AdminRepository;
 import com.appointment.appointmentAPI.user.repository.PatientRepository;
 import com.appointment.appointmentAPI.user.service.UserService;
@@ -75,6 +76,12 @@ public class AdminServiceImpl implements UserService {
 		userdto = modelMapper.map(admin, AdminDto.class);
 		
 		return userdto;
+	}
+
+	@Override
+	public UserEntity getUserFromUserId(String userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
