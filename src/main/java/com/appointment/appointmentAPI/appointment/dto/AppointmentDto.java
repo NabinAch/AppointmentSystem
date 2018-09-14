@@ -1,8 +1,8 @@
-package com.appointment.appointmentAPI.user.dto;
+package com.appointment.appointmentAPI.appointment.dto;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
+import com.appointment.appointmentAPI.user.dto.DepartmentDto;
 import com.appointment.appointmentAPI.user.model.Doctor;
 import com.appointment.appointmentAPI.user.model.Patient;
 
@@ -16,6 +16,7 @@ public class AppointmentDto {
 	private LocalDateTime createdTime;
 	private String patientNote;
 	private String doctorNote;
+	private DepartmentDto departmentDto;
 
 	public Long getId() {
 		return id;
@@ -79,6 +80,14 @@ public class AppointmentDto {
 
 	public void setDoctorNote(String doctorNote) {
 		this.doctorNote = doctorNote;
+	}
+
+	public DepartmentDto getDepartmentDto() {
+		return departmentDto;
+	}
+
+	public void setDepartmentDto(DepartmentDto departmentDto) {
+		this.departmentDto = departmentDto;
 	}
 
 }

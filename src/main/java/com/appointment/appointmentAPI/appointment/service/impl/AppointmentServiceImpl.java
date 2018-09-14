@@ -1,14 +1,14 @@
-package com.appointment.appointmentAPI.user.service.impl;
+package com.appointment.appointmentAPI.appointment.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.appointment.appointmentAPI.appointment.dto.AppointmentDto;
+import com.appointment.appointmentAPI.appointment.model.Appointment;
+import com.appointment.appointmentAPI.appointment.repository.AppointmentRepository;
+import com.appointment.appointmentAPI.appointment.service.AppointmentService;
 import com.appointment.appointmentAPI.shared.Utils;
-import com.appointment.appointmentAPI.user.dto.AppointmentDto;
-import com.appointment.appointmentAPI.user.model.Appointment;
-import com.appointment.appointmentAPI.user.repository.AppointmentRepository;
-import com.appointment.appointmentAPI.user.service.AppointmentService;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -25,9 +25,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public AppointmentDto createAppointment(AppointmentDto appointmentDto) {
 
-		int hour = appointmentDto.getStartTime().getHour();
-		int minute =appointmentDto.getStartTime().getMinute();
-		
 		if ((appointmentDto.getStartTime().getHour() < 8) || (appointmentDto.getStartTime().getMinute() != 0)
 				|| (appointmentDto.getStartTime().getHour() > 17) || (appointmentDto.getStartTime().getHour() == 13))
 			return null;

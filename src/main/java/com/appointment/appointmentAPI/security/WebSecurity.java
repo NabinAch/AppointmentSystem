@@ -24,12 +24,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		http.csrf().disable().authorizeRequests()
-		.antMatchers(HttpMethod.POST, "/patient")
+		.antMatchers(HttpMethod.POST, "/patient", "/department","/admin")
 		.permitAll()
 		.antMatchers(HttpMethod.GET, "/patient", "/admin").hasAuthority("ROLE_ADMIN")
 		.antMatchers(HttpMethod.PUT, "/patient").hasAnyAuthority("ROLE_PATIENT","ROLE_ADMIN")
 		.antMatchers(HttpMethod.DELETE, "/patient").hasAnyAuthority("ROLE_PATIENT","ROLE_ADMIN")
-		.antMatchers(HttpMethod.POST, "/doctor", "/admin").hasAuthority("ROLE_ADMIN")
+		.antMatchers(HttpMethod.POST, "/doctor").hasAuthority("ROLE_ADMIN")
 		.antMatchers(HttpMethod.PUT, "/doctor", "/admin").hasAuthority("ROLE_ADMIN")
 		.antMatchers(HttpMethod.DELETE, "/doctor", "/admin").hasAuthority("ROLE_ADMIN")
 		.antMatchers(HttpMethod.GET, "/doctor").hasAnyAuthority("ROLE_ADMIN","ROLE_PATIENT")

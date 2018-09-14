@@ -1,4 +1,4 @@
-package com.appointment.appointmentAPI.user.request;
+package com.appointment.appointmentAPI.appointment.request;
 
 import java.time.LocalDateTime;
 

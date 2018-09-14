@@ -1,6 +1,10 @@
-package com.appointment.appointmentAPI.user.response;
+package com.appointment.appointmentAPI.appointment.response;
 
 import java.time.LocalDateTime;
+
+import com.appointment.appointmentAPI.user.response.DepartmentResponse;
+import com.appointment.appointmentAPI.user.response.DoctorResponseModel;
+import com.appointment.appointmentAPI.user.response.PatientResponseModel;
 
 public class AppointmentResponseModel {
 
@@ -10,6 +14,7 @@ public class AppointmentResponseModel {
 	private LocalDateTime startTime;
 	private LocalDateTime createdTime;
 	private String patientNote;
+	private DepartmentResponse departmentResponse;
 
 	public String getPublicId() {
 		return publicId;
@@ -58,6 +63,14 @@ public class AppointmentResponseModel {
 
 	public void setPatientNote(String patientNote) {
 		this.patientNote = patientNote;
+	}
+
+	public DepartmentResponse getDepartmentResponse() {
+		return departmentResponse;
+	}
+
+	public void setDepartmentResponse(DepartmentResponse departmentResponse) {
+		this.departmentResponse = departmentResponse;
 	}
 
 }

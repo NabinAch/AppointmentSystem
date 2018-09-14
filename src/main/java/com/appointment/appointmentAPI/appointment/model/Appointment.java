@@ -1,4 +1,4 @@
-package com.appointment.appointmentAPI.user.model;
+package com.appointment.appointmentAPI.appointment.model;
 
 import java.time.LocalDateTime;
 
@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 
+import com.appointment.appointmentAPI.user.model.Department;
+import com.appointment.appointmentAPI.user.model.Doctor;
+import com.appointment.appointmentAPI.user.model.Patient;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -32,6 +35,10 @@ public class Appointment {
 	@ManyToOne
 	@JoinColumn(name = "doctor_id")
 	private Doctor doctor;
+	
+	@JsonManagedReference
+	@ManyToOne
+	private Department department;
 
 	@Column(nullable = false, unique = true)
 	private LocalDateTime startTime;
@@ -40,7 +47,6 @@ public class Appointment {
 	private LocalDateTime createdTime;
 
 	@Column(length = 200)
-	
 	private String patientNote;
 
 	@Column(length = 200)

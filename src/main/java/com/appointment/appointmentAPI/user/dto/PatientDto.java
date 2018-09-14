@@ -2,7 +2,7 @@ package com.appointment.appointmentAPI.user.dto;
 
 import java.util.List;
 
-import com.appointment.appointmentAPI.user.model.Appointment;
+import com.appointment.appointmentAPI.appointment.model.Appointment;
 
 public class PatientDto extends UserDto{
 

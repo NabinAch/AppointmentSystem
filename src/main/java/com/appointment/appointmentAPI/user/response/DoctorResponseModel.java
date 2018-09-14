@@ -1,12 +1,14 @@
 package com.appointment.appointmentAPI.user.response;
 
+import com.appointment.appointmentAPI.user.dto.DepartmentDto;
+
 public class DoctorResponseModel {
 
 	private String userId;
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String department;
+	private DepartmentResponse department;
 	
 	
 	public String getUserId() {
@@ -33,10 +35,10 @@ public class DoctorResponseModel {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getDepartment() {
+	public DepartmentResponse getDepartment() {
 		return department;
 	}
-	public void setDepartment(String department) {
+	public void setDepartment(DepartmentResponse department) {
 		this.department = department;
 	}
 	

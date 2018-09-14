@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.appointment.appointmentAPI.appointment.model.Appointment;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity

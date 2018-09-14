@@ -6,7 +6,7 @@ public class DoctorRequestModel {
 	private String lastName;
 	private String email;
 	private String password;
-	private String department;
+	private String deptId;
 
 	public String getFirstName() {
 		return firstName;
@@ -40,12 +40,12 @@ public class DoctorRequestModel {
 		this.password = password;
 	}
 
-	public String getDepartment() {
-		return department;
+	public String getDeptId() {
+		return deptId;
 	}
 
-	public void setDepartment(String department) {
-		this.department = department;
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
 	}
 
 }
