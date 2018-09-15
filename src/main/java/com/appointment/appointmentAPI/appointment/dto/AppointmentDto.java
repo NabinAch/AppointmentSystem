@@ -3,20 +3,20 @@ package com.appointment.appointmentAPI.appointment.dto;
 import java.time.LocalDateTime;
 
 import com.appointment.appointmentAPI.user.dto.DepartmentDto;
-import com.appointment.appointmentAPI.user.model.Doctor;
-import com.appointment.appointmentAPI.user.model.Patient;
+import com.appointment.appointmentAPI.user.dto.DoctorDto;
+import com.appointment.appointmentAPI.user.dto.PatientDto;
 
 public class AppointmentDto {
 
 	private Long id;
 	private String publicId;
-	private Patient patient;
-	private Doctor doctor;
+	private PatientDto patient;
+	private DoctorDto doctor;
 	private LocalDateTime startTime;
 	private LocalDateTime createdTime;
 	private String patientNote;
 	private String doctorNote;
-	private DepartmentDto departmentDto;
+	private DepartmentDto department;
 
 	public Long getId() {
 		return id;
@@ -34,19 +34,20 @@ public class AppointmentDto {
 		this.publicId = publicId;
 	}
 
-	public Patient getPatient() {
+
+	public PatientDto getPatient() {
 		return patient;
 	}
 
-	public void setPatient(Patient patient) {
+	public void setPatient(PatientDto patient) {
 		this.patient = patient;
 	}
 
-	public Doctor getDoctor() {
+	public DoctorDto getDoctor() {
 		return doctor;
 	}
 
-	public void setDoctor(Doctor doctor) {
+	public void setDoctor(DoctorDto doctor) {
 		this.doctor = doctor;
 	}
 
@@ -82,12 +83,12 @@ public class AppointmentDto {
 		this.doctorNote = doctorNote;
 	}
 
-	public DepartmentDto getDepartmentDto() {
-		return departmentDto;
+	public DepartmentDto getDepartment() {
+		return department;
 	}
 
-	public void setDepartmentDto(DepartmentDto departmentDto) {
-		this.departmentDto = departmentDto;
+	public void setDepartment(DepartmentDto departmentDto) {
+		this.department = departmentDto;
 	}
 
 }

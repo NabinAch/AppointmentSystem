@@ -1,11 +1,7 @@
 package com.appointment.appointmentAPI.user.dto;
 
-import java.util.List;
-
-import com.appointment.appointmentAPI.user.model.Authority;
-
 public abstract class UserDto {
-
+	private long id;
 	private String userId;
 	private String firstName;
 	private String lastName;
@@ -86,6 +82,14 @@ public abstract class UserDto {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }

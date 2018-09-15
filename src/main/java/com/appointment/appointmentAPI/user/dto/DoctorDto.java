@@ -16,8 +16,8 @@ public class DoctorDto extends UserDto{
 		return department;
 	}
 
-	public void setDepartment(DepartmentDto departmenDto) {
-		this.department = departmenDto;
+	public void setDepartment(DepartmentDto department) {
+		this.department = department;
 	}
 
 	public List<Appointment> getAppointmentList() {

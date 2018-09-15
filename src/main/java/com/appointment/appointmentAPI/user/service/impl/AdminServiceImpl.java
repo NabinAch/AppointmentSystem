@@ -79,7 +79,7 @@ public class AdminServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserEntity getUserFromUserId(String userId) {
+	public UserDto getUserFromUserId(String userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

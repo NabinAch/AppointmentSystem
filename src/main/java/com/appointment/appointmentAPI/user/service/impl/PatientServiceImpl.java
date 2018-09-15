@@ -71,8 +71,12 @@ public class PatientServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserEntity getUserFromUserId(String userId) {
-		return patientRepo.findByUserId(userId);
+	public UserDto getUserFromUserId(String userId) {
+		Patient patient = patientRepo.findByUserId(userId);
+		UserDto userdto = new PatientDto();
+		userdto = modelMapper.map(patient, PatientDto.class);
+		
+		return userdto;
 	}
 
 }

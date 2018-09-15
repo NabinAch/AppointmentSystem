@@ -1,7 +1,6 @@
 package com.appointment.appointmentAPI.user.service;
 
 import com.appointment.appointmentAPI.user.dto.UserDto;
-import com.appointment.appointmentAPI.user.model.UserEntity;
 
 public interface UserService {
 
@@ -13,6 +12,6 @@ public interface UserService {
 	
 	UserDto getUser(String userName);
 
-	UserEntity getUserFromUserId(String userId);
+	UserDto getUserFromUserId(String userId);
 	
 }

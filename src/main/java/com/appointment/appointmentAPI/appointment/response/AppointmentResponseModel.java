@@ -14,7 +14,7 @@ public class AppointmentResponseModel {
 	private LocalDateTime startTime;
 	private LocalDateTime createdTime;
 	private String patientNote;
-	private DepartmentResponse departmentResponse;
+	private DepartmentResponse department;
 
 	public String getPublicId() {
 		return publicId;
@@ -65,12 +65,12 @@ public class AppointmentResponseModel {
 		this.patientNote = patientNote;
 	}
 
-	public DepartmentResponse getDepartmentResponse() {
-		return departmentResponse;
+	public DepartmentResponse getDepartment() {
+		return department;
 	}
 
-	public void setDepartmentResponse(DepartmentResponse departmentResponse) {
-		this.departmentResponse = departmentResponse;
+	public void setDepartment(DepartmentResponse departmentResponse) {
+		this.department = departmentResponse;
 	}
 
 }

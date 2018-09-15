@@ -6,26 +6,27 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class AppointmentRequestModel {
 
-	private String patientId;
-	private String doctorId;
+	private String patient;
+	private String doctor;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime startTime;
 	private String patientNote;
 
-	public String getPatientId() {
-		return patientId;
+
+	public String getPatient() {
+		return patient;
 	}
 
-	public void setPatientId(String patientId) {
-		this.patientId = patientId;
+	public void setPatient(String patient) {
+		this.patient = patient;
 	}
 
-	public String getDoctorId() {
-		return doctorId;
+	public String getDoctor() {
+		return doctor;
 	}
 
-	public void setDoctorId(String doctorId) {
-		this.doctorId = doctorId;
+	public void setDoctor(String doctor) {
+		this.doctor = doctor;
 	}
 
 	public LocalDateTime getStartTime() {
