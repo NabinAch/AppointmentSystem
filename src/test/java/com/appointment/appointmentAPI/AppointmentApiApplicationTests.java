@@ -11,6 +11,7 @@ public class AppointmentApiApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		//todo: add test cases
 	}
 
 }
